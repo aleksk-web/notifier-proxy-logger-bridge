@@ -1,6 +1,6 @@
 {
     "type": "library",
-    "name": "Volmarg/notifier-proxy-logger-bridge",
+    "name": "volmarg/notifier-proxy-logger-bridge",
     "description": "Bridge between NotifierProxyLogger and other projects",
     "license": "proprietary",
     "minimum-stability": "dev",
