@@ -137,6 +137,10 @@ class BaseResponse
         $success       = $this->getArrayValueByKey(self::KEY_SUCCESS, $dataArray, false);
         $invalidFields = $this->getArrayValueByKey(self::KEY_INVALID_FIELDS, $dataArray, []);
 
+        if( is_string($invalidFields) ){
+            $invalidFields = json_decode($invalidFields, true);
+        }
+
         $this->setCode($code);
         $this->setMessage($message);
         $this->setSuccess($success);

@@ -106,11 +106,11 @@ class NotifierProxyLoggerBridge
      */
     public function buildAbsoluteCalledUrlForRequest(BaseRequest $request): string
     {
-         if( substr($this->baseUrl, -1) !== DIRECTORY_SEPARATOR ){
-             $this->baseUrl .= DIRECTORY_SEPARATOR;
-         }
+        if( substr($this->baseUrl, -1) === DIRECTORY_SEPARATOR ){
+            $this->baseUrl = substr($this->baseUrl, 0, strlen($this->baseUrl) -1);
+        }
 
-        return $this->baseUrl . $request->getRequestUri() . $request->getRequestUri();
+        return $this->baseUrl . $request->getRequestUri();
     }
 
     /**

@@ -21,7 +21,7 @@ class GuzzleHttpService
 
     const REQUEST_METHOD_POST = "POST";
 
-    const KEY_BODY = "body";
+    const KEY_JSON = "json";
 
     /**
      * @param string $calledUrl
@@ -32,7 +32,7 @@ class GuzzleHttpService
     public function sendPostRequest(string $calledUrl, array $dataBag = []): string
     {
         $response = $this->client->request(self::REQUEST_METHOD_POST, $calledUrl, [
-            self::KEY_BODY => $dataBag,
+            self::KEY_JSON => $dataBag,
         ]);
 
         return $response->getBody()->getContents();
