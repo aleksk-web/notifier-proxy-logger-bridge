@@ -21,6 +21,9 @@ use TypeError;
 class NotifierProxyLoggerBridge
 {
 
+    const WEBHOOK_NAME_ALL_NOTIFICATIONS = "allNotifications";
+    const SOURCE_PMS                     = "PMS";
+
     /**
      * @var GuzzleHttpService $guzzleHttpService
      */
