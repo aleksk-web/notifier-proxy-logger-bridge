@@ -23,6 +23,7 @@ class NotifierProxyLoggerBridge
 
     const WEBHOOK_NAME_ALL_NOTIFICATIONS = "allNotifications";
     const SOURCE_PMS                     = "PMS";
+    const SOURCE_CIR                     = "CIR";
 
     /**
      * @var GuzzleHttpService $guzzleHttpService
