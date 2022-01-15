@@ -20,7 +20,6 @@ class GuzzleHttpService
     }
 
     const REQUEST_METHOD_POST = "POST";
-    const REQUEST_METHOD_GET  = "GET";
 
     const KEY_JSON = "json";
 
