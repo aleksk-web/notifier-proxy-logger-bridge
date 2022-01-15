@@ -20,6 +20,7 @@ class GuzzleHttpService
     }
 
     const REQUEST_METHOD_POST = "POST";
+    const REQUEST_METHOD_GET  = "GET";
 
     const KEY_JSON = "json";
 
@@ -38,4 +39,14 @@ class GuzzleHttpService
         return $response->getBody()->getContents();
     }
 
+    /**
+     * @param string $calledUrl
+     * @return string
+     * @throws GuzzleException
+     */
+    public function sendGetRequest(string $calledUrl): string
+    {
+        $response = $this->client->request(self::REQUEST_METHOD_GET, $calledUrl);
+        return $response->getBody()->getContents();
+    }
 }

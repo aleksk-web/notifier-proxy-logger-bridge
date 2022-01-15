@@ -6,9 +6,11 @@ namespace App;
 
 use App\Request\BaseRequest;
 use App\Request\Discord\InsertDiscordMessageRequest;
+use App\Request\Mail\GetMailStatusRequest;
 use App\Request\Mail\InsertMailRequest;
 use App\Response\BaseResponse;
 use App\Response\Discord\InsertDiscordMessageResponse;
+use App\Response\Mail\GetMailStatusResponse;
 use App\Response\Mail\InsertMailResponse;
 use App\Service\GuzzleHttpService;
 use Exception;
@@ -90,6 +92,32 @@ class NotifierProxyLoggerBridge
             {
                 $absoluteCalledUrl = $this->buildAbsoluteCalledUrlForRequest($request);
                 $guzzleResponse    = $this->guzzleHttpService->sendPostRequest($absoluteCalledUrl, $request->toArray());
+
+                $response->prefillBaseFieldsFromJsonString($guzzleResponse);
+            }
+            $this->logResponse($response);
+        }catch(Exception | TypeError $e){
+            $this->logThrowable($e);
+            return $response->prefillInternalBridgeError();
+        }
+
+        return $response;
+    }
+
+    /**
+     * Will call the NPL to get mail status
+     *
+     * @param GetMailStatusRequest $request
+     * @return GetMailStatusResponse
+     */
+    public function getMailStatus(GetMailStatusRequest $request): GetMailStatusResponse
+    {
+        $response = new GetMailStatusResponse();
+        try{
+            $this->logCalledApiMethod($request);
+            {
+                $absoluteCalledUrl = $this->buildAbsoluteCalledUrlForRequest($request);
+                $guzzleResponse    = $this->guzzleHttpService->sendGetRequest($absoluteCalledUrl);
 
                 $response->prefillBaseFieldsFromJsonString($guzzleResponse);
             }
