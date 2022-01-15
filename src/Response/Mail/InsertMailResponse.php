@@ -54,6 +54,8 @@ class InsertMailResponse extends BaseResponse
             throw new MalformedResponseException("Inserted E-Mail id is missing in response");
         }
 
+        $this->setId($id);
+
         return $prefilledDto;
     }
 }
