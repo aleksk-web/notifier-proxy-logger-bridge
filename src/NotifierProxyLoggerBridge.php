@@ -109,6 +109,7 @@ class NotifierProxyLoggerBridge
      *
      * @param GetMailStatusRequest $request
      * @return GetMailStatusResponse
+     * @throws GuzzleException
      */
     public function getMailStatus(GetMailStatusRequest $request): GetMailStatusResponse
     {

@@ -3,6 +3,7 @@
 namespace App\Response\Mail;
 
 use App\Exception\MalformedJsonException;
+use App\Exception\MalformedResponseException;
 use App\Response\BaseResponse;
 
 /**
@@ -69,13 +70,17 @@ class GetMailStatusResponse extends BaseResponse
      *
      * @return GetMailStatusResponse
      * @throws MalformedJsonException
+     * @throws MalformedResponseException
      */
     public function prefillBaseFieldsFromJsonString(string $json): self
     {
         $dataArray    = $this->jsonToArray($json);
         $prefilledDto = parent::prefillBaseFieldsFromJsonString($json);
 
-        $status = $this->getArrayValueByKey(self::KEY_CODE, $dataArray, self::KEY_STATUS);
+        $status = $this->getArrayValueByKey(self::KEY_STATUS, $dataArray);
+        if( empty($status) ){
+            throw new MalformedResponseException("E-Mail sending status is missing in response");
+        }
         $prefilledDto->setStatus($status);
 
         return $prefilledDto;
