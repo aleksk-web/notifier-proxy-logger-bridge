@@ -46,7 +46,7 @@ class GuzzleHttpService
      */
     public function sendGetRequest(string $calledUrl): string
     {
-        $response = $this->client->request(self::REQUEST_METHOD_GET, $calledUrl);
+        $response = $this->client->get($calledUrl);
         return $response->getBody()->getContents();
     }
 }
