@@ -4,6 +4,7 @@
 namespace App;
 
 
+use App\DTO\Mail\MailDTO;
 use App\Request\BaseRequest;
 use App\Request\Discord\InsertDiscordMessageRequest;
 use App\Request\Mail\GetMailStatusRequest;
@@ -95,6 +96,10 @@ class NotifierProxyLoggerBridge
                     throw new LogicException("Attachments names must be unique. This one is not unique: {$fileName}");
                 }
                 $attachedFilesNames[] = $fileName;
+            }
+
+            if( !in_array($request->getMailDto()->getEmailType(), MailDTO::ALLOWED_TYPES) ){
+                throw new LogicException("Provided E-Mail type is not supported: {$request->getMailDto()->getEmailType()}. Allowed are:" . json_encode(MailDTO::ALLOWED_TYPES));
             }
 
             $this->logCalledApiMethod($request);

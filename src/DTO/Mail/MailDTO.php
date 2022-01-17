@@ -18,6 +18,11 @@ class MailDTO
      */
     public const TYPE_PLAIN = "PLAIN";
 
+    public const ALLOWED_TYPES = [
+        self::TYPE_NOTIFICATION,
+        self::TYPE_PLAIN,
+    ];
+
     const KEY_FROM_EMAIL  = 'fromEmail';
     const KEY_SUBJECT     = 'subject';
     const KEY_BODY        = 'body';
