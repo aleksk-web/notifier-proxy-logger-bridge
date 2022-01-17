@@ -15,6 +15,7 @@ use App\Response\Mail\InsertMailResponse;
 use App\Service\GuzzleHttpService;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
+use LogicException;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Throwable;
@@ -88,6 +89,14 @@ class NotifierProxyLoggerBridge
     {
         $response = new InsertMailResponse();
         try{
+            $attachedFilesNames = [];
+            foreach($request->getMailDto()->getAttachments() as $fileName => $fileContent){
+                if( in_array($fileName, $attachedFilesNames) ){
+                    throw new LogicException("Attachments names must be unique. This one is not unique: {$fileName}");
+                }
+                $attachedFilesNames[] = $fileName;
+            }
+
             $this->logCalledApiMethod($request);
             {
                 $absoluteCalledUrl = $this->buildAbsoluteCalledUrlForRequest($request);

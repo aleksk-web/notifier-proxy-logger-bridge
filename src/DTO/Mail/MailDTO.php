@@ -8,11 +8,12 @@ namespace App\DTO\Mail;
  */
 class MailDTO
 {
-    const KEY_FROM_EMAIL = 'fromEmail';
-    const KEY_SUBJECT    = 'subject';
-    const KEY_BODY       = 'body';
-    const KEY_SOURCE     = 'source';
-    const KEY_TO_EMAILS  = 'toEmails';
+    const KEY_FROM_EMAIL  = 'fromEmail';
+    const KEY_SUBJECT     = 'subject';
+    const KEY_BODY        = 'body';
+    const KEY_SOURCE      = 'source';
+    const KEY_TO_EMAILS   = 'toEmails';
+    const KEY_ATTACHMENTS = 'attachments';
 
     /**
      * @var string $fromEmail
@@ -38,6 +39,13 @@ class MailDTO
      * @var array $toEmails
      */
     private array $toEmails = [];
+
+    /**
+     * Key is a file name, value is file_content {@see file_get_contents()}
+     *
+     * @var Array<string> $attachments
+     */
+    private array $attachments = [];
 
     /**
      * @return string
@@ -120,6 +128,22 @@ class MailDTO
     }
 
     /**
+     * @return string[]
+     */
+    public function getAttachments(): array
+    {
+        return $this->attachments;
+    }
+
+    /**
+     * @param string[] $attachments
+     */
+    public function setAttachments(array $attachments): void
+    {
+        $this->attachments = $attachments;
+    }
+
+    /**
      * Returns dto data in form of string
      *
      * @return string
@@ -138,11 +162,12 @@ class MailDTO
     public function toArray(): array
     {
         return [
-            self::KEY_FROM_EMAIL => $this->getFromEmail(),
-            self::KEY_SUBJECT    => $this->getSubject(),
-            self::KEY_BODY       => $this->getBody(),
-            self::KEY_SOURCE     => $this->getSource(),
-            self::KEY_TO_EMAILS  => $this->getToEmails(),
+            self::KEY_FROM_EMAIL  => $this->getFromEmail(),
+            self::KEY_SUBJECT     => $this->getSubject(),
+            self::KEY_BODY        => $this->getBody(),
+            self::KEY_SOURCE      => $this->getSource(),
+            self::KEY_TO_EMAILS   => $this->getToEmails(),
+            self::KEY_ATTACHMENTS => $this->getAttachments(),
         ];
     }
 }
