@@ -8,6 +8,16 @@ namespace App\DTO\Mail;
  */
 class MailDTO
 {
+    /**
+     * Sends symfony styled notification (Warning / error etc.)
+     */
+    public const TYPE_NOTIFICATION = "NOTIFICATION";
+
+    /**
+     * Sends plain E-Mail, meaning that nothing extra gets rendered, wrapped into etc.
+     */
+    public const TYPE_PLAIN = "PLAIN";
+
     const KEY_FROM_EMAIL  = 'fromEmail';
     const KEY_SUBJECT     = 'subject';
     const KEY_BODY        = 'body';
