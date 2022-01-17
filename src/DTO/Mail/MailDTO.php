@@ -14,11 +14,17 @@ class MailDTO
     const KEY_SOURCE      = 'source';
     const KEY_TO_EMAILS   = 'toEmails';
     const KEY_ATTACHMENTS = 'attachments';
+    const KEY_EMAIL_TYPE  = "emailType";
 
     /**
      * @var string $fromEmail
      */
     private string $fromEmail = "";
+
+    /**
+     * @var string $emailType
+     */
+    private string $emailType = "";
 
     /**
      * @var string $subject
@@ -144,6 +150,22 @@ class MailDTO
     }
 
     /**
+     * @return string
+     */
+    public function getEmailType(): string
+    {
+        return $this->emailType;
+    }
+
+    /**
+     * @param string $emailType
+     */
+    public function setEmailType(string $emailType): void
+    {
+        $this->emailType = $emailType;
+    }
+
+    /**
      * Returns dto data in form of string
      *
      * @return string
@@ -168,6 +190,7 @@ class MailDTO
             self::KEY_SOURCE      => $this->getSource(),
             self::KEY_TO_EMAILS   => $this->getToEmails(),
             self::KEY_ATTACHMENTS => $this->getAttachments(),
+            self::KEY_EMAIL_TYPE  => $this->getEmailType(),
         ];
     }
 }
